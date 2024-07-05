@@ -1,0 +1,15 @@
+service: "zero_shot_classifier_service:svc"
+description: "A zero-shot classification service using DeBERTa-v3-base-mnli-fever-anli"
+labels:
+  owner: "Piyush"
+  project: "zero-shot-classification"
+include:
+  - "*.py"
+  - "Pipfile"
+  - "Pipfile.lock"
+docker:
+  distro: "debian"
+  python_version: "3.10"
+  # cuda_version: "11.1"  # Specify CUDA version if you're using GPU support
+  system_packages:
+    - build-essential
