@@ -1,4 +1,4 @@
-service: "zero_shot_classifier_service:svc"
+service: "service:ZeroShotClassificationService"
 description: "A zero-shot classification service using DeBERTa-v3-base-mnli-fever-anli"
 labels:
   owner: "Piyush"
