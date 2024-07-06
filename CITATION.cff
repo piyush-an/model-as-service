@@ -1,1 +1,16 @@
-Laurer, Moritz, Wouter van Atteveldt, Andreu Salleras Casas, and Kasper Welbers. 2022. 'Less Annotating, More Classifying - Addressing the Data Scarcity Issue of Supervised Machine Learning with Deep Transfer Learning and BERT - NLI'. Preprint, June. Open Science Framework. https://osf.io/74b8k
+cff-version: 1.2.0
+message: "If you use this model, please cite the following work."
+authors:
+  - family-names: Laurer
+    given-names: Moritz
+  - family-names: van Atteveldt
+    given-names: Wouter
+  - family-names: Salleras Casas
+    given-names: Andreu
+  - family-names: Welbers
+    given-names: Kasper
+title: "Less Annotating, More Classifying - Addressing the Data Scarcity Issue of Supervised Machine Learning with Deep Transfer Learning and BERT - NLI"
+version: "2022"
+doi: "10.31219/osf.io/74b8k"
+date-released: "2022-06-01"
+url: "https://osf.io/74b8k"
