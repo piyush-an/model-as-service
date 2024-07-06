@@ -1,11 +1,5 @@
 version: '3.9'
 services:
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: zipkin
-    ports:
-      - '9411:9411'
-    restart: always
   locust_master:
     image: locustio/locust
     container_name: locust_master
@@ -15,7 +9,6 @@ services:
       - ./tests:/mnt/locust
     command: -f /mnt/locust/locustfile.py --master -H http://locust_master:8089
     restart: always
-  
   locust_worker:
     image: locustio/locust
     container_name: locust_worker
