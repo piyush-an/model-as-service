@@ -6,7 +6,12 @@ include:
   - "*.py"
 python:
   packages:
-      - torch
-      - transformers
+      - pydantic==2.8.2
+      - torch==2.3.1
+      - transformers==4.42.3
+      - bentoml==1.2.19
 docker:
   python_version: "3.10"
+
+# bentoml build
+# bentoml containerize zero_shot_classifier_service:gqzrl3uvykjr4esa

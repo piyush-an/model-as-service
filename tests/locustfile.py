@@ -1,7 +1,8 @@
+import os
 import random
 from locust import HttpUser, between, task
 
-# FLAG_MULTI_LABELS = False
+# Sample sentences and labels
 LABELS = ["politics", "economy", "entertainment", "environment"]
 SAMPLE_SENTENCES = [
     # Politics
@@ -18,22 +19,29 @@ SAMPLE_SENTENCES = [
     "Conservation efforts have led to a significant increase in the population of endangered species.",
 ]
 
-
 class BentoHttpUser(HttpUser):
     """
-    Start locust load testing client with:
-
-        locust --class-picker -H http://localhost:3003
-
-    Open browser at http://0.0.0.0:8089, adjust desired number of users and spawn rate for the load test from the Web UI and start swarming.
+    Load test client for Locust.
     """
 
     @task
     def classify(self):
         text = random.choice(SAMPLE_SENTENCES)
-        labels = LABELS
-        # multi_label = FLAG_MULTI_LABELS
-
-        self.client.post("/classify", json={"text": text, "labels": labels})
+        self.client.post("/classify", json={"text": text, "labels": LABELS})
 
     wait_time = between(0.01, 2)
+
+# Determine which API to test against based on an environment variable
+# API_HOST = os.getenv("API_HOST", "http://fastapi_classifier:8000")
+
+# class MultiApiUser(HttpUser):
+#     """
+#     Load test for multiple APIs.
+#     """
+    
+#     @task
+#     def classify(self):
+#         text = random.choice(SAMPLE_SENTENCES)
+#         self.client.post(f"{API_HOST}/classify", json={"text": text, "labels": LABELS})
+
+#     wait_time = between(0.01, 2)

@@ -1,5 +1,17 @@
-version: '3.9'
 services:
+  fastapi_classifier:
+    build: ./fastapi
+    container_name: fastapi_classifier
+    ports:
+      - "8000:8000"
+    restart: always
+
+  bento_classifier:
+    image: zero_shot_classifier_service:ph7daaev7w5rmesa
+    container_name: bento_classifier
+    ports:
+      - "3000:3000"
+    restart: always
   locust_master:
     image: locustio/locust
     container_name: locust_master

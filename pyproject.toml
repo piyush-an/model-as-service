@@ -11,6 +11,8 @@ python = "^3.10"
 transformers = "^4.42.3"
 torch = "^2.3.1"
 bentoml = "^1.2.19"
+fastapi = "^0.115.4"
+uvicorn = "^0.32.0"
 
 
 [tool.poetry.group.dev.dependencies]

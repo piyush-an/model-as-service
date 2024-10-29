@@ -14,14 +14,13 @@ class ClassificationInput(BaseModel):
     multi_label: bool = Field(default=False, description="Whether to allow multiple labels")
 
 
-@bentoml.service(name="zero_shot_classifier_service", resources={"cpu": "2"}, workers=2, traffic={"timeout": 30})
+@bentoml.service(name="zero_shot_classifier_service") #, resources={"cpu": "2"}, workers=2, traffic={"timeout": 30})
 class ZeroShotClassificationService:
     def __init__(self) -> None:
         self.classifier = pipeline(task="zero-shot-classification", model=MODEL_NAME)
 
     @bentoml.api(input_spec=ClassificationInput)
-    def classify(self, **params: typing.Any) -> dict:
-        # Access parameters from the request
+    async def classify(self, **params: typing.Any) -> dict:
         sequence_to_classify = params["text"]
         candidate_labels = params["labels"]
         multi_label = params["multi_label"]
@@ -29,13 +28,10 @@ class ZeroShotClassificationService:
         with bentoml.monitor("text_classification") as mon:
             mon.log(sequence_to_classify, name="input_text", role="original_text", data_type="text")
 
-            # Performing zero-shot classification using the initialized pipeline
             output = self.classifier(sequence_to_classify, candidate_labels, multi_label=multi_label)
-
-            # Determining the index of the label with the highest score and label
             max_index = output["scores"].index(max(output["scores"]))
             max_label = output["labels"][max_index]
 
             mon.log(max_label, name="classification_label", role="target", data_type="categorical")
 
-            return {"label": max_label, "score": output["scores"][max_index]}
+            return {"label": output["labels"], "score": output["scores"]}
